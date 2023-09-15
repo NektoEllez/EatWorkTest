@@ -8,13 +8,28 @@
 import SwiftUI
 
 class Coordinator: ObservableObject {
-    @Published var isPresenting: Bool = false
-    
-    func present() {
-        isPresenting = true
+    @Published var currentView: AnyView
+
+    init(startView: AnyView) {
+        self.currentView = startView
+    }
+
+    func changeView(_ view: AnyView) {
+        currentView = view
     }
     
-    func dismiss() {
-        isPresenting = false
+    func showDescriptionPage() {
+//        let viewModel = DescriptionViewModel() // создайте этот класс, если он еще не существует
+        let view = DetailView(cellData: CellData())
+        changeView(AnyView(view))
     }
+
+    func showContentView() {
+//        let viewModel = ContentViewModel() // создайте этот класс, если он еще не существует
+        let view = ContentView()
+        changeView(AnyView(view))
+    }
+
 }
+
+

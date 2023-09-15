@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct EatWorkTestApp: App {
+    @StateObject private var coordinator = Coordinator(startView: AnyView(ContentView()))
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            coordinator.currentView
+                .environmentObject(coordinator)
         }
     }
 }
+
+
